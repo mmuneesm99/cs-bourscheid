@@ -3,6 +3,10 @@ import type { Config } from "tailwindcss"
 export default {
   theme: {
     extend: {
+      fontFamily: {
+        display: ["Unbounded", "sans-serif"],
+        sans: ["Manrope", "sans-serif"]
+      },
       colors: {
         brand: {
           orange: "#D71920",

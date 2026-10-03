@@ -16,7 +16,7 @@ useHead(() => ({
 </script>
 
 <template>
-  <div class="bg-brand-grayBg text-slate-800 antialiased selection:bg-brand-orange selection:text-white overflow-x-hidden min-h-screen">
+  <div class="min-h-screen w-full max-w-[100vw] overflow-x-clip bg-[#eef1f6] text-[#1c2128] antialiased selection:bg-brand-orange selection:text-white">
     <SiteHeader />
     <slot />
     <SiteFooter />

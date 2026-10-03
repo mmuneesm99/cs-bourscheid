@@ -149,6 +149,7 @@ export type Copy = {
     played: string
     points: string
     sofascore: string
+    ellSheet: string
     seasonLabel: string
     results: string
     source: string
@@ -159,6 +160,8 @@ export type Copy = {
     homeBadge: string
     awayBadge: string
     awayNote: string
+    upcoming: string
+    upcomingLead: string
     form: string
     table: string
     wins: string
@@ -234,7 +237,7 @@ const fr: Copy = {
   nav: { home: "Accueil", club: "Le Club", history: "Histoire", matches: "Matchs", squad: "Équipe", honours: "Palmarès", contact: "Contact" },
   chrome: {
     division: "FLF 2. Division (1. Bezirk)",
-    ticker: "5e journée : SC Ell – CS Bourscheid · 4 oct. 2026, 16:00",
+    ticker: "5e journée : SC Ell – CS Bourscheid · Terrain Um Essig · 4 oct. 2026, 16:00",
     ground: "Terrain \"In der Ae\"",
     join: "Rejoindre le Club",
     founded: "Fondé en 1969 • CS Buurschent",
@@ -401,6 +404,7 @@ const fr: Copy = {
     played: "matchs",
     points: "pts",
     sofascore: "Voir sur Sofascore",
+    ellSheet: "Fiche du match chez SC Ell",
     seasonLabel: "Saison 2026/27 · 4 journées",
     results: "Résultats",
     source: "Scores publiés par Sofascore. Les dates sont celles du calendrier de la 2. Division, 1. Bezirk.",
@@ -410,7 +414,9 @@ const fr: Copy = {
     kickoff: "Coup d'envoi",
     homeBadge: "Domicile",
     awayBadge: "Extérieur",
-    awayNote: "Match à l'extérieur. Les rencontres à domicile se jouent au Terrain « In der Ae ».",
+    awayNote: "Match à l'extérieur au Terrain Um Essig, à Ell. Les rencontres à domicile se jouent au Terrain « In der Ae ».",
+    upcoming: "Matchs suivants",
+    upcomingLead: "Calendrier publié de la Division 2, de la 6e journée au 23 mai 2027. L'heure n'est indiquée que lorsqu'elle est publiée.",
     form: "Forme",
     table: "Classement",
     wins: "Victoires",
@@ -492,7 +498,7 @@ const lb: Copy = {
   nav: { home: "Heem", club: "De Club", history: "Geschicht", matches: "Matcher", squad: "Ekipp", honours: "Erfolleger", contact: "Kontakt" },
   chrome: {
     division: "FLF 2. Divisioun (1. Bezierk)",
-    ticker: "5. Spilldag: SC Ell – CS Bourscheid · 4. Okt. 2026, 16:00",
+    ticker: "5. Spilldag: SC Ell – CS Bourscheid · Terrain Um Essig · 4. Okt. 2026, 16:00",
     ground: "Terrain \"In der Ae\"",
     join: "Mam Club matmaachen",
     founded: "Gegrënnt 1969 • CS Buurschent",
@@ -659,6 +665,7 @@ const lb: Copy = {
     played: "Matcher",
     points: "Pts",
     sofascore: "Op Sofascore kucken",
+    ellSheet: "Matchblat beim SC Ell",
     seasonLabel: "Saison 2026/27 · 4 Spilldeeg",
     results: "Resultater",
     source: "Resultater publizéiert vu Sofascore. D'Datume sinn déi vum Kalenner vun der 2. Divisioun, 1. Bezierk.",
@@ -668,7 +675,9 @@ const lb: Copy = {
     kickoff: "Uspill",
     homeBadge: "Doheem",
     awayBadge: "Auswäerts",
-    awayNote: "Auswäertsmatch. D'Heemmatcher sinn um Terrain « In der Ae ».",
+    awayNote: "Auswäertsmatch um Terrain Um Essig zu Ell. D'Heemmatcher sinn um Terrain « In der Ae ».",
+    upcoming: "Nächst Matcher",
+    upcomingLead: "Publizéierte Kalenner vun der Divisioun 2, vum 6. Spilldag bis den 23. Mee 2027. D'Auer steet nëmmen dobäi, wann se publizéiert ass.",
     form: "Form",
     table: "Klassement",
     wins: "Victoiren",

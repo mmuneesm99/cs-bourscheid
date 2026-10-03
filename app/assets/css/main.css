@@ -1,3 +1,36 @@
+:root {
+  --ink: #1c2128;
+  --paper: #eef1f6;
+  --red: #d71920;
+  --night: #12151c;
+}
+
+html,
 body {
-  font-family: "Plus Jakarta Sans", sans-serif;
+  max-width: 100%;
+  overflow-x: clip;
+  background: var(--paper);
+}
+
+body {
+  font-family: "Manrope", sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+}
+
+h1,
+h2,
+h3,
+.display {
+  font-family: "Unbounded", sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1.02;
+}
+
+button,
+nav {
+  font-family: "Manrope", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.01em;
 }
