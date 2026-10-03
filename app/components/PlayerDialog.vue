@@ -48,7 +48,9 @@ onBeforeUnmount(() => {
         :aria-labelledby="`player-${playerSlug(player.name)}`"
         class="relative max-h-[92vh] w-full max-w-md overflow-y-auto rounded-2xl bg-white shadow-xl"
       >
-        <PlayerKit :name="player.name" :code="player.code" />
+        <div class="h-80 w-full">
+          <PlayerKit :name="player.name" :code="player.code" />
+        </div>
         <button
           ref="closeButton"
           type="button"

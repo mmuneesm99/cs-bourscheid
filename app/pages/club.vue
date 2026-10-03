@@ -31,7 +31,7 @@ useHead(() => ({
         <h2 class="mb-8 text-3xl text-slate-900">{{ t.club.join }}</h2>
         <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
           <article class="overflow-hidden rounded-2xl border border-slate-200">
-            <img src="/images/service-first-team.jpg" :alt="t.common.firstTeam" class="h-48 w-full object-cover">
+            <img src="/images/team.jpg" :alt="t.common.firstTeam" class="h-48 w-full object-cover">
             <div class="p-6">
               <h3 class="text-xl text-slate-900">{{ t.common.firstTeam }}</h3>
               <p class="mt-3 text-sm leading-relaxed text-slate-600">{{ t.club.firstText }}</p>

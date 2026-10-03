@@ -10,6 +10,9 @@ useHead(() => ({
 <template>
   <div>
     <PageHero :eyebrow="t.squad.eyebrow" :title="t.squad.title" :lead="t.squad.lead" />
+    <section class="mx-auto max-w-6xl px-4 pt-10 sm:px-6">
+      <img src="/images/team.jpg" :alt="t.common.firstTeam" class="w-full rounded-2xl object-cover">
+    </section>
     <section class="py-16">
       <div class="mx-auto max-w-6xl px-4 sm:px-6">
         <div class="mb-10 grid grid-cols-2 overflow-hidden rounded-2xl bg-white text-center shadow-sm lg:grid-cols-4">

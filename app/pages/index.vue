@@ -197,13 +197,16 @@ useHead(() => ({
           </div>
           <NuxtLink to="/equipe" class="text-sm font-semibold text-brand-orange">{{ t.home.seeRoster }}</NuxtLink>
         </div>
+        <img src="/images/team.jpg" :alt="t.home.firstTeam" class="mt-8 w-full rounded-2xl object-cover">
         <div class="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          <button v-for="player in highlights" :key="player.name" type="button" class="overflow-hidden rounded-2xl bg-white text-left shadow-sm hover:shadow-md" @click="selectedPlayer = player.name">
-            <PlayerKit :name="player.name" :code="player.code" />
-            <div class="p-5">
+          <button v-for="player in highlights" :key="player.name" type="button" class="flex h-[22.5rem] w-full flex-col overflow-hidden rounded-2xl bg-white text-left shadow-sm hover:shadow-md" @click="selectedPlayer = player.name">
+            <div class="h-56 w-full shrink-0">
+              <PlayerKit :name="player.name" :code="player.code" />
+            </div>
+            <div class="flex h-[8.5rem] flex-col px-5 py-4">
               <span class="text-xs font-semibold text-brand-orange">{{ t.roles[player.role] }}</span>
-              <h3 class="mt-1 text-lg text-slate-900">{{ player.name }}</h3>
-              <p class="mt-1 text-sm text-slate-500">{{ t.nations[player.nation] }} · {{ t.common.born }} {{ player.born }}</p>
+              <h3 class="mt-1 line-clamp-2 text-lg leading-tight text-slate-900">{{ player.name }}</h3>
+              <p class="mt-auto line-clamp-2 text-sm text-slate-500">{{ t.nations[player.nation] }} · {{ t.common.born }} {{ player.born }}</p>
             </div>
           </button>
         </div>
