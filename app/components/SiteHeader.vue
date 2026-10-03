@@ -8,6 +8,14 @@ watch(() => route.path, () => {
   open.value = false
 })
 
+watch(open, (value) => {
+  if (import.meta.client) document.body.style.overflow = value ? "hidden" : ""
+})
+
+onBeforeUnmount(() => {
+  if (import.meta.client) document.body.style.overflow = ""
+})
+
 function linkClass(page: string, mobile: boolean) {
   const active = route.path === (page === "accueil" ? "/" : `/${page}`)
   if (mobile) {
@@ -59,10 +67,12 @@ function linkClass(page: string, mobile: boolean) {
         </button>
       </div>
     </div>
+  </header>
+  <Teleport to="body">
     <div
       v-if="open"
       id="mobile-nav"
-      class="fixed inset-0 z-[60] flex flex-col bg-[#12151c] px-6 py-6 text-white lg:hidden"
+      class="fixed inset-0 z-[80] flex min-h-dvh flex-col overflow-y-auto bg-[#12151c] px-6 py-6 text-white lg:hidden"
     >
       <div class="flex items-center justify-between">
         <img src="/images/logo.png" alt="" class="h-12 w-12 object-contain" width="48" height="48">
@@ -73,7 +83,7 @@ function linkClass(page: string, mobile: boolean) {
           {{ item.label }}
         </NuxtLink>
       </nav>
-      <a href="mailto:csb@pt.lu" class="mt-auto text-sm text-white/70">csb@pt.lu</a>
+      <a href="mailto:csb@pt.lu" class="mt-auto pt-10 text-sm text-white/70">csb@pt.lu</a>
     </div>
-  </header>
+  </Teleport>
 </template>

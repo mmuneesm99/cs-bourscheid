@@ -42,12 +42,10 @@ useHead(() => ({
       <div class="absolute inset-0 bg-gradient-to-t from-[#12151c] via-[#12151c]/35 to-[#12151c]/40" />
       <div class="relative mx-auto grid min-w-0 max-w-6xl items-end gap-10 px-4 py-16 sm:px-6 lg:min-h-[40rem] lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:py-20">
         <div class="min-w-0">
-          <div class="flex items-start justify-between gap-4">
-            <img src="/images/logo.png" alt="" class="h-16 w-16 object-contain sm:h-20 sm:w-20" width="80" height="80">
-            <p class="text-xs font-semibold uppercase tracking-[0.18em] text-white/80">{{ t.home.heroBadge }}</p>
-          </div>
+          <img src="/images/logo.png" alt="" class="h-16 w-16 object-contain sm:h-20 sm:w-20" width="80" height="80">
           <p class="mt-10 text-xs font-semibold uppercase tracking-[0.18em] text-white/80">{{ next?.competition[lang] || t.home.heroBadge }}</p>
           <h1 class="mt-3 max-w-full text-5xl text-white sm:text-7xl">CS Buurschent</h1>
+          <p class="mt-4 text-xs font-semibold uppercase tracking-[0.18em] text-white/80">{{ t.home.heroBadge }}</p>
         </div>
         <article class="min-w-0 rounded-2xl bg-white p-6 text-[#243040] shadow-xl shadow-black/20 sm:p-8">
           <p class="text-lg text-brand-orange">{{ t.matches.next }}</p>
