@@ -160,6 +160,7 @@ export type Copy = {
     homeBadge: string
     awayBadge: string
     awayNote: string
+    noNext: string
     upcoming: string
     upcomingLead: string
     form: string
@@ -415,8 +416,9 @@ const fr: Copy = {
     homeBadge: "Domicile",
     awayBadge: "Extérieur",
     awayNote: "Match à l'extérieur au Terrain Um Essig, à Ell. Les rencontres à domicile se jouent au Terrain « In der Ae ».",
+    noNext: "Les matchs publiés vont jusqu'au 23 mai 2027. Il n'y a plus de rencontre à venir.",
     upcoming: "Matchs suivants",
-    upcomingLead: "Calendrier publié de la Division 2, de la 6e journée au 23 mai 2027. L'heure n'est indiquée que lorsqu'elle est publiée.",
+    upcomingLead: "Calendrier publié jusqu'au 23 mai 2027. L'heure n'est indiquée que lorsqu'elle est publiée.",
     form: "Forme",
     table: "Classement",
     wins: "Victoires",
@@ -676,8 +678,9 @@ const lb: Copy = {
     homeBadge: "Doheem",
     awayBadge: "Auswäerts",
     awayNote: "Auswäertsmatch um Terrain Um Essig zu Ell. D'Heemmatcher sinn um Terrain « In der Ae ».",
+    noNext: "Déi publizéiert Matcher ginn bis den 23. Mee 2027. Et ass kee Match méi ze kommen.",
     upcoming: "Nächst Matcher",
-    upcomingLead: "Publizéierte Kalenner vun der Divisioun 2, vum 6. Spilldag bis den 23. Mee 2027. D'Auer steet nëmmen dobäi, wann se publizéiert ass.",
+    upcomingLead: "Publizéierte Kalenner bis den 23. Mee 2027. D'Auer steet nëmmen dobäi, wann se publizéiert ass.",
     form: "Form",
     table: "Klassement",
     wins: "Victoiren",

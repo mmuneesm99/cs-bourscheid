@@ -9,7 +9,7 @@ const standing = computed(() => fill(t.value.matches.standing, {
   place: tableAfterFour.place[lang.value],
   points: tableAfterFour.points
 }))
-const nextFixtures = computed(() => upcomingFixtures.slice(0, 2))
+const { next, following } = useFixtures()
 
 const results = computed(() => leagueResults.map((match) => ({
   ...match,
@@ -46,45 +46,49 @@ useHead(() => ({
             <img src="/images/logo.png" alt="" class="h-16 w-16 object-contain sm:h-20 sm:w-20" width="80" height="80">
             <p class="text-xs font-semibold uppercase tracking-[0.18em] text-white/80">{{ t.home.heroBadge }}</p>
           </div>
-          <p class="mt-10 text-xs font-semibold uppercase tracking-[0.18em] text-white/80">{{ roundFive.competition[lang] }}</p>
+          <p class="mt-10 text-xs font-semibold uppercase tracking-[0.18em] text-white/80">{{ next?.competition[lang] || t.home.heroBadge }}</p>
           <h1 class="mt-3 max-w-full text-5xl text-white sm:text-7xl">CS Buurschent</h1>
         </div>
         <article class="min-w-0 rounded-2xl bg-white p-6 text-[#243040] shadow-xl shadow-black/20 sm:p-8">
           <p class="text-lg text-brand-orange">{{ t.matches.next }}</p>
-          <p class="mt-1 text-sm text-black/60">{{ roundFive.round[lang] }}</p>
-          <div class="mt-6 flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
-            <div>
-              <p class="text-xl font-bold leading-tight text-slate-900">{{ roundFive.home }}</p>
-              <p class="mt-2 text-sm text-slate-500">{{ t.matches.homeBadge }}</p>
+          <template v-if="next">
+            <p class="mt-1 text-sm text-black/60">{{ next.round[lang] }}</p>
+            <div class="mt-6 flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+              <div>
+                <p class="text-xl font-bold leading-tight text-slate-900">{{ next.home }}</p>
+                <p class="mt-2 text-sm text-slate-500">{{ t.matches.homeBadge }}</p>
+              </div>
+              <div class="lg:text-center">
+                <p class="text-sm text-brand-orange">{{ t.matches.kickoff }}</p>
+                <p v-if="next.time" class="display mt-1 text-4xl tabular-nums text-slate-900">{{ next.time }}</p>
+                <p v-else class="mt-1 text-sm text-slate-500">{{ next.date[lang] }}</p>
+              </div>
+              <div class="border-t border-slate-200 pt-5 lg:border-0 lg:pt-0 lg:text-right">
+                <p class="text-xl font-bold leading-tight text-slate-900">{{ next.away }}</p>
+                <p class="mt-2 text-sm text-brand-orange">{{ t.matches.awayBadge }}</p>
+              </div>
             </div>
-            <div class="lg:text-center">
-              <p class="text-sm text-brand-orange">{{ t.matches.kickoff }}</p>
-              <p class="display mt-1 text-4xl tabular-nums text-slate-900">{{ roundFive.time }}</p>
+            <p class="mt-6 text-sm text-slate-700">{{ next.date[lang] }}</p>
+            <p v-if="next.venue" class="mt-1 text-sm font-semibold text-slate-900">{{ next.venue }}</p>
+            <p v-if="next.page" class="mt-2 text-sm leading-relaxed text-slate-500">{{ t.matches.awayNote }}</p>
+            <div class="mt-6 flex flex-wrap gap-3">
+              <NuxtLink to="/matchs" class="inline-flex rounded-full bg-brand-orange px-5 py-2.5 text-sm text-white hover:bg-brand-orangeHover">{{ t.home.matchInfo }}</NuxtLink>
+              <a v-if="next.page" :href="next.page" class="inline-flex rounded-full border border-slate-300 px-5 py-2.5 text-sm hover:border-brand-orange" target="_blank" rel="noopener noreferrer">{{ t.matches.ellSheet }}</a>
             </div>
-            <div class="border-t border-slate-200 pt-5 lg:border-0 lg:pt-0 lg:text-right">
-              <p class="text-xl font-bold leading-tight text-slate-900">{{ roundFive.away }}</p>
-              <p class="mt-2 text-sm text-brand-orange">{{ t.matches.awayBadge }}</p>
-            </div>
-          </div>
-          <p class="mt-6 text-sm text-slate-700">{{ roundFive.date[lang] }}</p>
-          <p class="mt-1 text-sm font-semibold text-slate-900">{{ roundFive.venue }}</p>
-          <p class="mt-2 text-sm leading-relaxed text-slate-500">{{ t.matches.awayNote }}</p>
-          <div class="mt-6 flex flex-wrap gap-3">
-            <NuxtLink to="/matchs" class="inline-flex rounded-full bg-brand-orange px-5 py-2.5 text-sm text-white hover:bg-brand-orangeHover">{{ t.home.matchInfo }}</NuxtLink>
-            <a :href="roundFive.page" class="inline-flex rounded-full border border-slate-300 px-5 py-2.5 text-sm hover:border-brand-orange" target="_blank" rel="noopener noreferrer">{{ t.matches.ellSheet }}</a>
-          </div>
+          </template>
+          <p v-else class="mt-4 text-sm leading-relaxed text-slate-600">{{ t.matches.noNext }}</p>
         </article>
       </div>
     </section>
 
-    <section class="border-b border-slate-200 bg-white" :aria-label="t.matches.upcoming">
+    <section v-if="following.length" class="border-b border-slate-200 bg-white" :aria-label="t.matches.upcoming">
       <div class="mx-auto max-w-6xl px-4 py-8 sm:px-6">
         <div class="flex items-end justify-between gap-4">
           <p class="text-sm font-semibold text-brand-orange">{{ t.matches.upcoming }}</p>
           <NuxtLink to="/matchs" class="shrink-0 text-sm font-semibold text-brand-orange">{{ t.home.matchInfo }}</NuxtLink>
         </div>
         <ul class="mt-5 grid gap-3 lg:grid-cols-2">
-          <li v-for="match in nextFixtures" :key="match.date.FR" class="rounded-2xl border border-slate-200 px-4 py-4">
+          <li v-for="match in following" :key="match.kickoff" class="rounded-2xl border border-slate-200 px-4 py-4">
             <p class="text-sm text-slate-500">{{ match.round[lang] }} · {{ match.date[lang] }}<span v-if="match.time"> · {{ match.time }}</span></p>
             <p class="mt-2 text-base text-slate-900">
               <span :class="match.home === 'CS Bourscheid' ? 'font-semibold' : ''">{{ match.home }}</span>

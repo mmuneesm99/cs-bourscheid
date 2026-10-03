@@ -1,5 +1,6 @@
 <script setup lang="ts">
-const { nav, toggle, indicator, t } = useClubLang()
+const { nav, toggle, indicator, t, lang } = useClubLang()
+const { next } = useFixtures()
 const route = useRoute()
 const open = ref(false)
 
@@ -25,7 +26,8 @@ function linkClass(page: string, mobile: boolean) {
     <div class="bg-slate-900 text-sm text-slate-300">
       <div class="mx-auto flex w-full min-w-0 max-w-6xl items-center gap-4 px-4 py-2 sm:px-6">
         <span class="hidden shrink-0 font-medium text-brand-orange sm:inline">{{ t.chrome.division }}</span>
-        <NuxtLink to="/matchs" class="min-w-0 flex-1 truncate hover:text-white">{{ t.chrome.ticker }}</NuxtLink>
+        <NuxtLink v-if="next" to="/matchs" class="min-w-0 flex-1 truncate hover:text-white">{{ next.round[lang] }} : {{ next.home }} – {{ next.away }}<span v-if="next.venue"> · {{ next.venue }}</span> · {{ next.date[lang] }}<span v-if="next.time">, {{ next.time }}</span></NuxtLink>
+        <span v-else class="min-w-0 flex-1 truncate">{{ t.matches.noNext }}</span>
         <span class="hidden shrink-0 sm:inline">{{ t.chrome.ground }}</span>
       </div>
     </div>

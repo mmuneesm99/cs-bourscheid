@@ -3,6 +3,7 @@ import { fill } from "~/utils/copy"
 import { clubOutcome } from "~/utils/matches"
 
 const { t, lang } = useClubLang()
+const { next, later } = useFixtures()
 
 const standing = computed(() => fill(t.value.matches.standing, {
   place: tableAfterFour.place[lang.value],
@@ -49,18 +50,21 @@ useHead(() => ({
       <div class="mx-auto grid min-w-0 max-w-6xl items-end gap-8 px-4 py-12 sm:px-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:py-16">
         <div class="min-w-0">
           <p class="text-sm font-semibold text-brand-orange">{{ t.matches.next }}</p>
-          <h1 class="mt-2 text-5xl text-slate-900 sm:text-6xl">{{ roundFive.home }}</h1>
-          <p class="display mt-2 text-2xl text-slate-400">{{ roundFive.away }}</p>
-          <p class="mt-4 max-w-xl text-base leading-relaxed text-slate-600">{{ t.matches.awayNote }}</p>
+          <template v-if="next">
+            <h1 class="mt-2 text-5xl text-slate-900 sm:text-6xl">{{ next.home }}</h1>
+            <p class="display mt-2 text-2xl text-slate-400">{{ next.away }}</p>
+            <p v-if="next.page" class="mt-4 max-w-xl text-base leading-relaxed text-slate-600">{{ t.matches.awayNote }}</p>
+          </template>
+          <p v-else class="mt-4 max-w-xl text-base leading-relaxed text-slate-600">{{ t.matches.noNext }}</p>
         </div>
-        <div class="rounded-2xl bg-slate-900 px-6 py-6 text-white">
-          <p class="text-sm text-brand-orange">{{ roundFive.competition[lang] }} · {{ roundFive.round[lang] }}</p>
-          <p class="display mt-2 text-5xl tabular-nums">{{ roundFive.time }}</p>
-          <p class="mt-2 text-sm text-slate-300">{{ roundFive.date[lang] }}</p>
-          <p class="mt-1 text-sm text-white">{{ roundFive.venue }}</p>
-          <p class="mt-1 text-sm text-slate-400">{{ t.matches.awayBadge }}</p>
+        <div v-if="next" class="rounded-2xl bg-slate-900 px-6 py-6 text-white">
+          <p class="text-sm text-brand-orange">{{ next.competition[lang] }} · {{ next.round[lang] }}</p>
+          <p v-if="next.time" class="display mt-2 text-5xl tabular-nums">{{ next.time }}</p>
+          <p class="mt-2 text-sm text-slate-300">{{ next.date[lang] }}</p>
+          <p v-if="next.venue" class="mt-1 text-sm text-white">{{ next.venue }}</p>
+          <p class="mt-1 text-sm text-slate-400">{{ next.side === "home" ? t.matches.homeBadge : t.matches.awayBadge }}</p>
           <div class="mt-5 flex flex-wrap gap-3">
-            <a :href="roundFive.page" class="inline-flex rounded-full bg-brand-orange px-5 py-2.5 text-sm text-white hover:bg-brand-orangeHover" target="_blank" rel="noopener noreferrer">{{ t.matches.ellSheet }}</a>
+            <a v-if="next.page" :href="next.page" class="inline-flex rounded-full bg-brand-orange px-5 py-2.5 text-sm text-white hover:bg-brand-orangeHover" target="_blank" rel="noopener noreferrer">{{ t.matches.ellSheet }}</a>
             <a :href="sofascoreTeam" class="inline-flex rounded-full border border-white/30 px-5 py-2.5 text-sm text-white hover:border-brand-orange" target="_blank" rel="noopener noreferrer">{{ t.matches.sofascore }}</a>
           </div>
         </div>
@@ -72,7 +76,7 @@ useHead(() => ({
         <p class="text-sm font-semibold text-brand-orange">{{ t.matches.upcoming }}</p>
         <p class="mt-2 max-w-2xl text-sm text-slate-500">{{ t.matches.upcomingLead }}</p>
         <ul class="mt-6 divide-y divide-slate-200 border-y border-slate-200">
-          <li v-for="match in upcomingFixtures" :key="match.date.FR" class="grid gap-3 py-4 sm:grid-cols-[13rem_5rem_minmax(0,1fr)] sm:items-center">
+          <li v-for="match in later" :key="match.kickoff" class="grid gap-3 py-4 sm:grid-cols-[13rem_5rem_minmax(0,1fr)] sm:items-center">
             <div>
               <p class="text-sm text-slate-500">{{ match.round[lang] }}</p>
               <p class="text-sm text-slate-700">{{ match.date[lang] }}</p>
